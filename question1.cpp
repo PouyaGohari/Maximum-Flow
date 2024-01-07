@@ -11,9 +11,10 @@
 using namespace std;
 class Graph{
     public:
-    Graph(int nodes);
     vector<int> dikestra(int source);
     void change_edge(int first, int second, int weight);
+    void getting_input();
+    vector<vector<int>> get_adj(){ return this -> adjacency_matrix; };
     private:
     int number_of_nodes;
     vector<vector<int>> adjacency_matrix;
@@ -21,10 +22,23 @@ class Graph{
     vector<int> dist;
 };
 
-Graph :: Graph(int nodes){
-    this -> number_of_nodes = nodes;
-    this -> calculations.assign(nodes, 0);
-    this -> adjacency_matrix.assign(nodes, vector<int> (nodes, 0));
+void Graph :: getting_input(){
+    int real_number_nodes;
+    cin >> real_number_nodes;
+    this -> number_of_nodes = 2*real_number_nodes + 2;
+    this -> adjacency_matrix.assign(this->number_of_nodes, vector<int>(this->number_of_nodes, 0));
+    this -> calculations.assign(this->number_of_nodes ,0);
+    for(int i = 1; i <= real_number_nodes; i++){
+        change_edge(0, i, 1);
+        change_edge(i + real_number_nodes , this->number_of_nodes-1, 1);
+    }
+    for(int i = 1; i <= real_number_nodes; i++){
+        for(int j = real_number_nodes + 1; j <= 2*real_number_nodes; j++){
+            int weight;
+            cin >> weight;
+            change_edge(i, j, weight);
+        }
+    }
 }
 
 void Graph :: change_edge(int first, int second, int weight){
