@@ -129,9 +129,7 @@ void graph :: finding_path_part2(){
         finding_path_part2_1(k);
     }
     else if(mates[k] != 0){
-        finding_pat  25 40 35 
-  40 60 35 
-  20 40 25 h_part2_2(k);
+        finding_path_part2_2(k);
     }
     else{
         this -> path = k;
