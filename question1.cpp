@@ -38,22 +38,18 @@ void graph :: getting_input(){
     cin >> this -> number_of_nodes;
     this -> adj_matrix.assign(number_of_nodes, vector<int>(number_of_nodes, 0));
     this -> x.assign(number_of_nodes, vector<int>(number_of_nodes, 0));
+    this -> u.assign(number_of_nodes, INT_MAX);
+    this -> v.assign(number_of_nodes, INT_MAX);
+    int x = 0;
     for(int i = 0; i < number_of_nodes; i++){
         for(int j = 0; j < number_of_nodes; j++){
             cin >> this -> adj_matrix[i][j];
+            this -> u[i] = min(u[i], adj_matrix[i][j]);
         }
     }
-    this -> u.assign(number_of_nodes, 0);
-    this -> v.assign(number_of_nodes, 0);
 }
 
 void graph :: initialize_dual(){
-    for(int i = 0; i < number_of_nodes; i++){
-        this -> u[i] = adj_matrix[i][i];
-        for(int j = 0; j < number_of_nodes; j++){
-            this -> u[i] = min(this -> u[i], this -> adj_matrix[i][j]);
-        }
-    }
     for(int j = 0; j < number_of_nodes; j++){
         this -> v[j] = this -> adj_matrix[j][j] - this -> u[j];
         for(int i = 0; i < number_of_nodes; i++){
@@ -208,7 +204,7 @@ void graph :: hungarian_algorithm(){
         }
         iteration_primal();
     }
-    int sum = 0;
+    long long sum = 0;
     for(int i = 0; i < number_of_nodes; i++){
         for(int j = 0; j < number_of_nodes; j++){
             if(x[i][j] == 1){
