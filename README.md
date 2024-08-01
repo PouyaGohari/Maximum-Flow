@@ -16,7 +16,7 @@ This repository contains implementations of graph-based algorithms designed to s
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
-- You have installed the latest version of C++ (or the relevant programming language).
+- You have installed the latest version of C++ .
 - You have a basic understanding of graph algorithms and data structures.
 
 ## Installation
